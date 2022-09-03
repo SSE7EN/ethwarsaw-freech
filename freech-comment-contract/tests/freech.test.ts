@@ -77,6 +77,7 @@ describe('Testing the Atomic NFT Token', () => {
       id: 1,
       creator: owner,
       content: 'Hello world!',
+      timestamp: expect.any(Number),
       votes: { addresses: [], status: 0 },
     }]);
   });
@@ -142,6 +143,7 @@ describe('Testing the Atomic NFT Token', () => {
       id: 1,
       creator: owner,
       content: 'Hello world!',
+      timestamp: expect.any(Number),
       votes: { addresses: [user2, user3], status: 0 },
     });
   });
@@ -154,6 +156,7 @@ describe('Testing the Atomic NFT Token', () => {
       id: 1,
       creator: owner,
       content: 'Hello world!',
+      timestamp: expect.any(Number),
       votes: { addresses: [user2, user3], status: 0 },
     });
   });

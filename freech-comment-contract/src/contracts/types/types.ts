@@ -4,6 +4,7 @@ export interface FreechState {
 
 interface Comment {
     id: number;
+    timestamp: number;
     creator: string;
     content: string;
     votes: {

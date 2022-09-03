@@ -10,8 +10,10 @@ export const postComment = async (
     if (!content) {
         throw new ContractError(`Creator must provide a message content.`);
     }
+
     comments.push({
         id,
+        timestamp: SmartWeave.block.timestamp,
         creator: caller,
         content,
         votes: {
