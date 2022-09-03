@@ -1,5 +1,15 @@
+import {readSite} from "../actions/read/readSite";
+
 export interface FreechState {
     siteComments: Map<String, Comment[]>;
+    sites: Map<String, Site>;
+}
+
+interface Site {
+    votes: {
+        addresses: string[];
+        status: number;
+    };
 }
 
 interface Comment {
@@ -29,12 +39,18 @@ export type FreechFunction =
     | 'postComment'
     | 'upvoteComment'
     | 'downvoteComment'
+    | 'upvoteSite'
+    | 'downvoteSite'
     | 'readComment'
-    | 'readComments';
+    | 'readComments'
+    | `readSite`;
 
 // src/contracts/types/types.ts
 
 export type FreechCommentResult = Comment;
 export type FreechCommentsResult = Comment[];
+export type FreechSiteResult = Site;
 
-export type ContractResult = { state: FreechState } | { result: FreechCommentResult } | { result: FreechCommentsResult };
+
+export type ContractResult = { state: FreechState } | { result: FreechCommentResult } |
+    { result: FreechCommentsResult } |  { result: FreechSiteResult };
