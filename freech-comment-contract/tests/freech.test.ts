@@ -10,7 +10,8 @@ jest.setTimeout(30000);
 interface Site {
   votes: {
     addresses: string[];
-    status: number;
+    up: number;
+    down: number;
   };
 }
 describe('Testing the Atomic NFT Token', () => {
@@ -87,7 +88,7 @@ describe('Testing the Atomic NFT Token', () => {
       creator: owner,
       content: 'Hello world!',
       timestamp: expect.any(Number),
-      votes: { addresses: [], status: 0 },
+      votes: { addresses: [], up: 0, down:0 },
     }]);
   });
 
@@ -121,7 +122,7 @@ describe('Testing the Atomic NFT Token', () => {
     await freech.writeInteraction({ function: 'upvoteComment', originHash:'hash1', commentId: 1 });
 
     const { cachedValue } = await freech.readState();
-    expect(cachedValue.state.siteComments['hash1'][0].votes.status).toEqual(1);
+    expect(cachedValue.state.siteComments['hash1'][0].votes.up).toEqual(1);
   });
 
   it('should not be possible to vote for the same message twice', async () => {
@@ -142,7 +143,7 @@ describe('Testing the Atomic NFT Token', () => {
     await freech.writeInteraction({ function: 'downvoteComment', originHash:'hash1', commentId: 1});
 
     const { cachedValue } = await freech.readState();
-    expect(cachedValue.state.siteComments['hash1'][0].votes.status).toEqual(0);
+    expect(cachedValue.state.siteComments['hash1'][0].votes.down).toEqual(1);
   });
 
   it('should properly view comment', async () => {
@@ -153,7 +154,7 @@ describe('Testing the Atomic NFT Token', () => {
       creator: owner,
       content: 'Hello world!',
       timestamp: expect.any(Number),
-      votes: { addresses: [user2, user3], status: 0 },
+      votes: { addresses: [user2, user3], up: 1, down: 1 },
     });
   });
 
@@ -166,7 +167,7 @@ describe('Testing the Atomic NFT Token', () => {
       creator: owner,
       content: 'Hello world!',
       timestamp: expect.any(Number),
-      votes: { addresses: [user2, user3], status: 0 },
+      votes: { addresses: [user2, user3], up: 1, down: 1 },
     });
   });
 
@@ -176,7 +177,7 @@ describe('Testing the Atomic NFT Token', () => {
     await freech.writeInteraction({ function: 'upvoteSite', originHash:'hash1'});
 
     const { cachedValue } = await freech.readState();
-    expect(cachedValue.state.sites['hash1'].votes.status).toEqual(1);
+    expect(cachedValue.state.sites['hash1'].votes.up).toEqual(1);
   });
 
   it('should not be possible to vote for the same message twice', async () => {
@@ -197,14 +198,14 @@ describe('Testing the Atomic NFT Token', () => {
     await freech.writeInteraction({ function: 'downvoteSite', originHash:'hash1' });
 
     const { cachedValue } = await freech.readState();
-    expect(cachedValue.state.sites['hash1'].votes.status).toEqual(0);
+    expect(cachedValue.state.sites['hash1'].votes.down).toEqual(1);
   });
 
   it('should properly view site', async () => {
     const { result } = await freech.viewState({ function: 'readSite', originHash: 'hash1' });
 
     expect(result).toEqual({
-      votes: { addresses: [user2, user3], status: 0 },
+      votes: { addresses: [user2, user3], up: 1, down: 1 },
     });
   });
 

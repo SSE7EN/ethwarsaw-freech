@@ -11,7 +11,8 @@ export const upvoteSite = async (
         state.sites[originHash] = {
             votes: {
                 addresses: [],
-                status: 0,
+                up: 0,
+                down: 0,
             },
         }
         site = state.sites[originHash];
@@ -21,7 +22,7 @@ export const upvoteSite = async (
         throw new ContractError(`Caller has already voted.`);
     }
 
-    site.votes.status++;
+    site.votes.up++;
     site.votes.addresses.push(caller);
 
     return { state };
@@ -36,7 +37,8 @@ export const downvoteSite = async (
         state.sites[originHash] = {
             votes: {
                 addresses: [],
-                status: 0,
+                up: 0,
+                down: 0,
             },
         }
         site = state.sites[originHash];
@@ -50,7 +52,7 @@ export const downvoteSite = async (
         throw new ContractError(`Caller has already voted.`);
     }
 
-    site.votes.status--;
+    site.votes.down++;
     site.votes.addresses.push(caller);
 
     return { state };

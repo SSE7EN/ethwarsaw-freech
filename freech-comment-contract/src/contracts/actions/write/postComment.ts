@@ -18,7 +18,8 @@ export const postComment = async (
         content,
         votes: {
             addresses: [],
-            status: 0,
+            up: 0,
+            down: 0,
         },
     })
 
