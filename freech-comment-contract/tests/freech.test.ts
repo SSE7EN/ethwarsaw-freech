@@ -7,6 +7,12 @@ import path from 'path';
 
 jest.setTimeout(30000);
 
+interface Site {
+  votes: {
+    addresses: string[];
+    status: number;
+  };
+}
 describe('Testing the Atomic NFT Token', () => {
   let ownerWallet: JWKInterface;
   let owner: string;
@@ -42,7 +48,10 @@ describe('Testing the Atomic NFT Token', () => {
 
     ({jwk: user3Wallet, address: user3} = await warp.testing.generateWallet());
 
-    initialState = { siteComments: new Map<String, []>()};
+    initialState = {
+      siteComments: new Map<String, []>(),
+      sites: new Map<String, Site> (),
+    };
 
     contractSrc = fs.readFileSync(path.join(__dirname, '../dist/contract.js'), 'utf8');
 
@@ -66,7 +75,7 @@ describe('Testing the Atomic NFT Token', () => {
   });
 
   it('should read Freech state', async () => {
-    expect((await freech.readState()).cachedValue.state).toEqual({siteComments: {}});
+    expect((await freech.readState()).cachedValue.state).toEqual({siteComments: {}, sites: {}});
   });
 
   it('should properly post message', async () => {
@@ -160,4 +169,43 @@ describe('Testing the Atomic NFT Token', () => {
       votes: { addresses: [user2, user3], status: 0 },
     });
   });
+
+  it('should properly upvote site', async () => {
+    freech = warp.contract<FreechState>(contractId).connect(user2Wallet);
+
+    await freech.writeInteraction({ function: 'upvoteSite', originHash:'hash1'});
+
+    const { cachedValue } = await freech.readState();
+    expect(cachedValue.state.sites['hash1'].votes.status).toEqual(1);
+  });
+
+  it('should not be possible to vote for the same message twice', async () => {
+    freech = warp.contract<FreechState>(contractId).connect(user2Wallet);
+
+    await expect(freech.writeInteraction({ function: 'upvoteSite', originHash:'hash1'}, { strict: true })).rejects.toThrow(
+        'Cannot create interaction: Caller has already voted.'
+    );
+
+    await expect(freech.writeInteraction({ function: 'downvoteSite', originHash:'hash1' }, { strict: true })).rejects.toThrow(
+        'Caller has already voted.'
+    );
+  });
+
+  it('should properly downvote site', async () => {
+    freech = warp.contract<FreechState>(contractId).connect(user3Wallet);
+
+    await freech.writeInteraction({ function: 'downvoteSite', originHash:'hash1' });
+
+    const { cachedValue } = await freech.readState();
+    expect(cachedValue.state.sites['hash1'].votes.status).toEqual(0);
+  });
+
+  it('should properly view site', async () => {
+    const { result } = await freech.viewState({ function: 'readSite', originHash: 'hash1' });
+
+    expect(result).toEqual({
+      votes: { addresses: [user2, user3], status: 0 },
+    });
+  });
+
 });
