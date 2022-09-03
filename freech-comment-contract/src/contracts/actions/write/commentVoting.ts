@@ -25,7 +25,7 @@ export const upvoteComment = async (
     throw new ContractError(`Caller has already voted.`);
   }
 
-  comment.votes.status++;
+  comment.votes.up++;
   comment.votes.addresses.push(caller);
 
   return { state };
@@ -53,7 +53,7 @@ export const downvoteComment = async (
     throw new ContractError(`Caller has already voted.`);
   }
 
-  comment.votes.status--;
+  comment.votes.down++;
   comment.votes.addresses.push(caller);
 
   return { state };

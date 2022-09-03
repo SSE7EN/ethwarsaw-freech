@@ -8,7 +8,8 @@ export interface FreechState {
 interface Site {
     votes: {
         addresses: string[];
-        status: number;
+        up: number;
+        down: number;
     };
 }
 
@@ -19,7 +20,8 @@ interface Comment {
     content: string;
     votes: {
         addresses: string[];
-        status: number;
+        up: number;
+        down: number;
     };
 }
 
