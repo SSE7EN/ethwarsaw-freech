@@ -11,7 +11,7 @@ export const upvoteComment = async (
     throw new ContractError(`Comment for this hash does not exists`);
   }
 
-  const comment = comments.find((m) => (m.id = commentId));
+  const comment = comments.find((m) => (m.id == commentId));
 
   if (!comment) {
     throw new ContractError(`Comment does not exist.`);
@@ -39,7 +39,7 @@ export const downvoteComment = async (
   if(!comments){
     throw new ContractError(`Comment for this hash does not exists`);
   }
-  const comment = comments.find((m) => (m.id = commentId));
+  const comment = comments.find((m) => (m.id == commentId));
 
   if (!comment) {
     throw new ContractError(`Comment does not exist.`);
