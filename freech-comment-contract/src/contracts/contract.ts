@@ -4,6 +4,7 @@ import { postComment } from './actions/write/postComment';
 import { readComment, readComments } from './actions/read/readComment';
 import {upvoteSite, downvoteSite} from "./actions/write/siteVoting";
 import {readSite} from "./actions/read/readSite";
+import {readUser} from "./actions/read/readUser";
 
 declare const ContractError;
 
@@ -27,6 +28,8 @@ export async function handle(state: FreechState, action: FreechAction): Promise<
       return await readComments(state, action);
     case 'readSite':
       return await readSite(state, action);
+    case 'readUser':
+      return await readUser(state, action);
     default:
       throw new ContractError(`No function supplied or function not recognised: "${input.function}"`);
   }
