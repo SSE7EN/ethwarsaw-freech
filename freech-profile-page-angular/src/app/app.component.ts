@@ -21,7 +21,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     const warp = WarpFactory.forMainnet();
-    const freechContractTxId = 'YrN1hQ1ZscbTOOd_iSq26QK7Qzcr4wgCvnHdTVyLohk';
+    const freechContractTxId = '0IBX6g9ee0KZGRETzYWj88bk-1R9tmo0kmUmmzRXvH8';
     const profileContractTxId = 'RKC6SbfL0klGHF-tCYNlSinZzYSKjvLgCgiWycVO9OE';
     let profile = warp.contract<State>(profileContractTxId).connect(
       'use_wallet'

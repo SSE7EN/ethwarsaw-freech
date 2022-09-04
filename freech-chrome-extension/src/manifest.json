@@ -1,5 +1,5 @@
 {
-  "name": "Great Extension",
+  "name": "Freech",
   "version": "1.0",
   "description": "Build an Extension with Angular",
   "manifest_version": 3,
@@ -44,6 +44,9 @@
     "<all_urls>"
   ],
   "action": {
-    "default_popup": "index.html"
+    "default_popup": "index.html",
+    "default_icon": {
+      "32": "assets/images/logo_1.png"
+    }
   }
 }
