@@ -19,7 +19,7 @@ export const readComment = async (state: FreechState, { input: { originHash, com
 
 export const readComments = async (state: FreechState, { input: { originHash } }: FreechAction): Promise<ContractResult> => {
 
-  const comments = state.siteComments[originHash];
+  const comments = state.siteComments[originHash] != undefined ? state.siteComments[originHash] : {};
 
   return { result: comments };
 };
