@@ -1,0 +1,51 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "paths": {
+      "constants-browserify": [
+        "node_modules/constants-browserify"
+      ],
+      //      "@/": [
+      //        "src/*"
+      //      ],
+      "crypto": [
+        "node_modules/crypto-browserify"
+      ],
+      "constants": [
+        "node_modules/constants-browserify"
+      ],
+      "stream": [
+        "node_modules/stream-browserify"
+      ]
+    },
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "types": ["node"],
+    "importHelpers": true,
+    "target": "es2020",
+    "module": "es2020",
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}
