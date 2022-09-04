@@ -62,4 +62,4 @@ export type FreechUserResult = User;
 
 
 export type ContractResult = { state: FreechState } | { result: FreechCommentResult } |
-    { result: FreechCommentsResult } |  { result: FreechSiteResult } | { result: FreechUserResult };
+    { result: FreechCommentsResult } |  { result: FreechSiteResult } | { result: FreechUserResult } | {result: {} };

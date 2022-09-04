@@ -1,4 +1,5 @@
 import {ContractResult, FreechAction, FreechState} from "../../types/types";
+
 declare const ContractError;
 
 export const postComment = async (
@@ -22,8 +23,11 @@ export const postComment = async (
         },
     };
 
-    state.users[caller] = state.users[caller] != undefined ? state.users[caller] : {comments: new Map<number, Comment>};
+    if(state.users[caller] == undefined){
+        state.users[caller] = {comments: new Map<number, Comment>()};
+    }
     state.users[caller].comments[comment.id] = comment;
+
 
     comments.push(comment)
 
