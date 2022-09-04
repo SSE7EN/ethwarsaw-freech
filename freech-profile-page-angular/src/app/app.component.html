@@ -7,10 +7,10 @@
 
     <div class="profile-card__cnt js-profile-cnt">
       <div class="profile-card__name">{{walletId}}</div>
-      <div class="profile-card__txt">This is a place for description</div>
+      <div class="profile-card__txt">{{description}}</div>
 
-      <div class="profile-card-social">
-        <a href="https://twitter.com/iaMuhammedErdem" class="profile-card-social__item twitter" target="_blank">
+      <div class="profile-card-social" *ngIf="twitterUrl">
+        <a href="{{twitterUrl}}" class="profile-card-social__item twitter" target="_blank">
           <span class="icon-font">
               <svg class="icon"><use xlink:href="#icon-twitter"></use></svg>
           </span>
@@ -22,7 +22,7 @@
       <div class="comment-main-level" *ngFor="let comment of comments">
         <div class="comment-box">
           <div class="comment-head">
-            <span>{{comment.timestamp}}</span>
+            <span>{{timeDifference(getNow(), comment.timestamp)}}</span>
           </div>
           <div class="comment-content">
             {{comment.content}}
