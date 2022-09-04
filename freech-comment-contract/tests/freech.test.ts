@@ -1,11 +1,16 @@
 import ArLocal from 'arlocal';
 import { JWKInterface } from 'arweave/node/lib/wallet';
 import { LoggerFactory, Warp, WarpFactory, Contract } from 'warp-contracts';
-import { FreechState } from '../src/contracts/types/types';
+import { FreechState, Comment } from '../src/contracts/types/types';
 import fs from 'fs';
 import path from 'path';
 
 jest.setTimeout(30000);
+
+
+interface User {
+  comments: Map<number, Comment>
+}
 
 interface Site {
   votes: {
@@ -14,6 +19,7 @@ interface Site {
     down: number;
   };
 }
+
 describe('Testing the Atomic NFT Token', () => {
   let ownerWallet: JWKInterface;
   let owner: string;
@@ -50,8 +56,10 @@ describe('Testing the Atomic NFT Token', () => {
     ({jwk: user3Wallet, address: user3} = await warp.testing.generateWallet());
 
     initialState = {
+      commentsCount: 0,
       siteComments: new Map<String, []>(),
       sites: new Map<String, Site> (),
+      users: new Map<String, User> (),
     };
 
     contractSrc = fs.readFileSync(path.join(__dirname, '../dist/contract.js'), 'utf8');
@@ -76,7 +84,7 @@ describe('Testing the Atomic NFT Token', () => {
   });
 
   it('should read Freech state', async () => {
-    expect((await freech.readState()).cachedValue.state).toEqual({siteComments: {}, sites: {}});
+    expect((await freech.readState()).cachedValue.state).toEqual({commentsCount: 0, siteComments: {}, sites: {}, users: {}});
   });
 
   it('should properly post message', async () => {
@@ -206,6 +214,20 @@ describe('Testing the Atomic NFT Token', () => {
 
     expect(result).toEqual({
       votes: { addresses: [user2, user3], up: 1, down: 1 },
+    });
+  });
+
+  it('should properly view user', async () => {
+    const { result, errorMessage } = await freech.viewState({ function: 'readUser', user: owner });
+    expect(result).toEqual({
+      comments: {
+        "1": {
+          id: 1,
+          creator: owner,
+          content: 'Hello world!',
+          timestamp: expect.any(Number),
+          votes: { addresses: [user2, user3], up: 1, down: 1 },}
+      }
     });
   });
 

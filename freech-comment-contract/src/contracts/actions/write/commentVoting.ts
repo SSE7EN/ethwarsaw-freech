@@ -1,4 +1,4 @@
-import { FreechAction, FreechState, ContractResult } from '../../types/types';
+import {FreechAction, FreechState, ContractResult, Comment} from '../../types/types';
 
 declare const ContractError;
 
@@ -27,6 +27,7 @@ export const upvoteComment = async (
 
   comment.votes.up++;
   comment.votes.addresses.push(caller);
+  updateUserComment(state, comment);
 
   return { state };
 };
@@ -55,6 +56,15 @@ export const downvoteComment = async (
 
   comment.votes.down++;
   comment.votes.addresses.push(caller);
+  updateUserComment(state, comment);
 
   return { state };
 };
+
+const updateUserComment =  (
+    state: FreechState, comment: Comment
+): void => {
+  const user = state.users[comment.creator];
+  user.comments[comment.id] = comment;
+};
+
