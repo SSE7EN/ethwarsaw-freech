@@ -230,4 +230,9 @@ describe('Testing the Atomic NFT Token', () => {
       }
     });
   });
+
+  it('should properly view not existing user', async () => {
+    const { result, errorMessage } = await freech.viewState({ function: 'readUser', user: "notExisting" });
+    expect(result).toEqual({});
+  });
 });

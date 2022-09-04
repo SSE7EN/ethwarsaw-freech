@@ -1,6 +1,19 @@
 import fs from 'fs';
 import path from 'path';
 import { WarpFactory } from 'warp-contracts';
+import {Comment} from "../types/types";
+
+interface User {
+  comments: Map<number, Comment>
+}
+
+interface Site {
+  votes: {
+    addresses: string[];
+    up: number;
+    down: number;
+  };
+}
 
 (async () => {
   const warp = WarpFactory.forMainnet();
@@ -9,7 +22,10 @@ import { WarpFactory } from 'warp-contracts';
   const contractSrc = fs.readFileSync(path.join(__dirname, '../../../dist/contract.js'), 'utf8');
 
   const initialState = {
-        siteComments: {}
+      commentsCount: 0,
+      siteComments: new Map<String, []>(),
+      sites: new Map<String, Site> (),
+      users: new Map<String, User> (),
   };
 
   console.log('Deployment started');
