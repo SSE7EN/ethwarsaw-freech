@@ -230,5 +230,4 @@ describe('Testing the Atomic NFT Token', () => {
       }
     });
   });
-
 });
