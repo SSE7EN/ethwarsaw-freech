@@ -1,5 +1,3 @@
-import {readSite} from "../actions/read/readSite";
-
 export interface FreechState {
     commentsCount: number;
     siteComments: Map<String, Comment[]>;
