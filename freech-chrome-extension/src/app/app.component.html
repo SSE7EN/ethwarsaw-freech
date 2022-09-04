@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Freech</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body class="mat-typography">
+
+
+<div class="content" role="main" style="max-height: 700px;">
+
+    <div style="margin-bottom: 15px;">
+        <img src="assets/images/logo_1.png" class="logo-image logo-image-center">
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div style="margin-left: 5px; margin-right: 5px; margin-top: 5px;">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Leave a comment</mat-label>
+            <textarea matInput [(ngModel)]="commentInput" maxlength="1000" placeholder="..."></textarea>
+        </mat-form-field>
+    </div>
+
+
+    <mat-divider></mat-divider>
+
+    <section class="btn-send-group">
+        <div class="example-button-row">
+            <button (click)="onSave()" (@pulse.done)="swingDone($event)" [ngClass]="inputButtonClass"
+                    [@pulse]="swingButtonWiggle" mat-raised-button>Publish comment
+                <mat-icon aria-hidden="false" aria-label="Vote up" fontIcon="send"></mat-icon>
+            </button>
+        </div>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <app-comment-box *ngFor="let comment of commentBoxes"  [comment]="comment"></app-comment-box>
+
+    <!-- @TODO add no comments yet box -->
+    <app-empty-box *ngIf="commentBoxes.length==0"></app-empty-box>
+
+
+    <!--  <img src="assets/image/jp2gmd.jpeg" width="189" style="margin-top: 30px;"/>-->
+
+    <!-- Footer -->
+    <footer>
+        <div style="text-align: center">
+            ETHWarsaw 2022
+        </div>
+
+    </footer>
+
+</div>
+
+
+
+</body>
+

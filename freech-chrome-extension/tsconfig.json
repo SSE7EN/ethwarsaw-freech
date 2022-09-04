@@ -1,0 +1,89 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "paths": {
+      "constants-browserify": [
+        "node_modules/constants-browserify"
+      ],
+//      "@/*": [
+//        "src/*"
+//      ],
+      "crypto": [
+        "node_modules/crypto-browserify"
+      ],
+      "constants": [
+        "node_modules/constants-browserify"
+      ],
+      "stream": [
+        "node_modules/stream-browserify"
+      ]
+    },
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "types": ["node"],
+    "importHelpers": true,
+    "target": "es2020",
+    "module": "es2020",
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}
+
+
+
+
+//{
+//  "compilerOptions": {
+//    "target": "es2020",
+//    "module": "es2020",
+//    "jsx": "preserve",
+//    "importHelpers": true,
+//    "moduleResolution": "node",
+//    "skipLibCheck": true,----
+//    "resolveJsonModule": true,---
+//    "experimentalDecorators": true,
+//    "esModuleInterop": true,----
+//    "allowSyntheticDefaultImports": true,
+//    "sourceMap": true,
+//    "allowJs": true, -----
+//    "baseUrl": ".",
+//    "types": ["webpack-env", "jest"],
+//    "paths": {
+//      "@/*": ["src/*"],
+//      "crypto":["node_modules/crypto-browserify"],
+//      "constants":["node_modules/constants-browserify"],
+//      "stream": ["node_modules/stream-browserify"]
+//    },
+//    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+//  },
+//  "include": [
+//    "src/**/*.ts",
+//    "src/**/*.tsx",
+//    "src/**/*.vue",
+//    "tests/**/*.ts",
+//    "tests/**/*.tsx"
+//  ],
+//  "exclude": ["node_modules", "tests"]
+//}

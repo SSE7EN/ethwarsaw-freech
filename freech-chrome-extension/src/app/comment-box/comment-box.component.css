@@ -1,0 +1,8 @@
+.example-card {
+    max-width: 400px;
+}
+
+.example-header-image {
+    background-image: url('https://www.gravatar.com/avatar/BXWkQkouWtuzGiqNN26sklGedT4j8R2YVQb-azcaL1I?s=32&d=identicon&r=PG');
+    background-size: cover;
+}

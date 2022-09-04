@@ -1,0 +1,25 @@
+<mat-card class="example-card card-separation" [@fadeInOnEnter] style="min-width: 300px" >
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-subtitle style="font-style: italic;margin-top: 10px;font-size: 11px;">{{comment.walletAddress}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>{{comment.content}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button (click)="handleUpvote(comment.commentId)">
+            <mat-icon aria-hidden="false" aria-label="Vote up" fontIcon="thumb_up"></mat-icon>
+        </button>
+
+        <span style="padding-right: 5px">{{comment.likes}}</span>
+
+        <mat-progress-bar mode="determinate" style="width: 30%; display: inline-block;" value="40"></mat-progress-bar>
+
+        <span style="padding-left: 5px">{{comment.dislikes}}</span>
+
+        <button mat-button (click)="handleDislike(comment.commentId)">
+            <mat-icon aria-hidden="false" aria-label="Vote down" fontIcon="thumb_down"></mat-icon>
+        </button>
+
+    </mat-card-actions>
+</mat-card>
